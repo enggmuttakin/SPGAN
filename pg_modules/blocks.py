@@ -31,6 +31,8 @@ def NormLayer(c, mode='batch'):
         return nn.BatchNorm2d(c)
 
 
+
+
 ### Activations
 
 
@@ -105,6 +107,14 @@ def UpBlockBig(in_planes, out_planes):
         )
     return block
 
+def UpBlockBigSP(in_planes, out_planes):
+    block = nn.Sequential(
+        nn.Upsample(scale_factor=2, mode='nearest'),
+        conv2d(in_planes, out_planes, 3, 1, 1, bias=False),
+        NoiseInjection()
+        )
+    return block
+
 
 class UpBlockBigCond(nn.Module):
     def __init__(self, in_planes, out_planes, z_dim):
@@ -146,6 +156,18 @@ class SEBlock(nn.Module):
             conv2d(ch_in, ch_out, 4, 1, 0, bias=False),
             Swish(),
             conv2d(ch_out, ch_out, 1, 1, 0, bias=False),
+            nn.Sigmoid(),
+        )
+
+    def forward(self, feat_small, feat_big):
+        return feat_big * self.main(feat_small)
+
+class SEBlockSP(nn.Module):
+    def __init__(self, ch_in, ch_out):
+        super().__init__()
+        self.main = nn.Sequential(
+            nn.AdaptiveAvgPool2d(4),
+            conv2d(ch_in, ch_out, 4, 1, 0, bias=False),
             nn.Sigmoid(),
         )
 
