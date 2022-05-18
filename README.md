@@ -31,17 +31,17 @@ You can get the datasets we used in our project at their respective websites:
 
 conda activate pg
 
-Training on Pokemon for original Projected GAN
+## Training on Pokemon for original Projected GAN ##
 python train.py --outdir=./training-runs/ --cfg=fastgan --data=./data/pokemon256.zip \
 --gpus=8 --batch=64 --mirror=1 --snap=50 --batch-gpu=8 --kimg=10000
 
 
-Training for best deep model on FFHQ dataset
+## Training for best deep model on FFHQ dataset ##
 python train.py --outdir=./training-runs-70k-deep/ --cfg=styled_fastgan_deep --data=./data/ffhq70k-256.zip \
 --gpus=8 --batch=64 --mirror=1 --snap=50 --batch-gpu=8 --kimg=80000
 
 
-Training for original Projected GAN on FFHQ dataset
+## Training for original Projected GAN on FFHQ dataset ##
 python train.py --outdir=./training-runs-70k/ --cfg=fastgan --data=./data/ffhq70k-256.zip \
 --gpus=8 --batch=64 --mirror=1 --snap=50 --batch-gpu=8 --kimg=10000
 
@@ -51,12 +51,12 @@ python train.py --outdir=./training-runs-70k/ --cfg=fastgan --data=./data/ffhq70
 
 
 
-Training for the best lightweight stylized projected gan on FFHQ
+## Training for the best lightweight stylized projected gan on FFHQ ##
 
 python train.py --outdir=./training-runs-70k/ --cfg=styled_fastgan_v1b --data=./data/ffhq70k-256.zip \
 --gpus=8 --batch=64 --mirror=1 --snap=50 --batch-gpu=8 --kimg=10000
 
-Training for the runner up stylized projected gan on FFHQ
+## Training for the runner up stylized projected gan on FFHQ ##
 python train.py --outdir=./training-runs-70k/ --cfg=styled_fastgan --data=./data/ffhq70k-256.zip \
 --gpus=8 --batch=64 --mirror=1 --snap=50 --batch-gpu=8 --kimg=10000
 
